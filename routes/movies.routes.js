@@ -21,7 +21,6 @@ router.get("/movies", (req, res, next) => {
 })
 
 router.post('/movies/create', (req, res, next) => {
-    console.log(req.body.celebrity)
     const newMovie = {
         title: req.body.title,
         genre: req.body.genre,
@@ -36,5 +35,18 @@ router.post('/movies/create', (req, res, next) => {
         .catch((err) => next(err))
 });
 
+router.get("/movies/:id", (req, res, next) => {
+    const movieId =req.params.id
+     Movie.findById(movieId)
+        .populate("cast")
+        .then(foundedMovie => {
+            console.log({foundedMovie})
+            res.render("movies/movie-details", {foundedMovie})
+        })
+        .catch(err => {
+            console.log(`Err while getting a single post from the  DB: ${err}`);
+            next(err);
+        });
+})
 
 module.exports = router;

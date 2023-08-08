@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{foundedMovie.title}}</title>
+</head>
+<body>
+    <h1>{{foundedMovie.title}}</h1>
+    <p>{{foundedMovie.genre}}</p>
+    <p>{{foundedMovie.plot}}</p>
+    <ul>
+    {{#each foundedMovie.cast}}
+        <li>{{this.name}}</li>
+        <li>{{this.occupation}}</li>
+        <li>{{this.catchPhrase}}</li>
+    {{/each}}
+    </ul>
+</body>
+</html>
