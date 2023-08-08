@@ -36,11 +36,10 @@ router.post('/movies/create', (req, res, next) => {
 });
 
 router.get("/movies/:id", (req, res, next) => {
-    const movieId =req.params.id
-     Movie.findById(movieId)
+    const movieId = req.params.id
+    Movie.findById(movieId)
         .populate("cast")
         .then(foundedMovie => {
-            console.log({foundedMovie})
             res.render("movies/movie-details", {foundedMovie})
         })
         .catch(err => {
@@ -48,5 +47,16 @@ router.get("/movies/:id", (req, res, next) => {
             next(err);
         });
 })
+
+// router.post("/movies/:id/delete", (req, res, next) => {
+//     const movieId = req.params.id
+//     console.log(movieId)
+//     Movie.findByIdAndDelete(movieId)
+//         .then(foundedMovie => {
+//             console.log(foundedMovie)
+//             res.redirect("/movies/movies", {foundedMovie})
+//         })
+//         .catch((err) => next(err))
+// })
 
 module.exports = router;
