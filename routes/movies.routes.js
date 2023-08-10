@@ -57,4 +57,17 @@ router.post("/movies/:id/delete", (req, res, next) => {
         .catch((err) => next(err))
 })
 
+router.get("/movies/:id/edit", (req, res, next) => {
+    const movieId = req.params.id
+    Movie.findById(movieId)
+        .populate("cast")
+        .then(foundedMovie => {
+            res.render("movies/edit-movie", {foundedMovie})
+        })
+        .catch(err => {
+            console.log(`Err while getting a single post from the  DB: ${err}`);
+            next(err);
+        });
+})
+
 module.exports = router;
