@@ -48,15 +48,13 @@ router.get("/movies/:id", (req, res, next) => {
         });
 })
 
-// router.post("/movies/:id/delete", (req, res, next) => {
-//     const movieId = req.params.id
-//     console.log(movieId)
-//     Movie.findByIdAndDelete(movieId)
-//         .then(foundedMovie => {
-//             console.log(foundedMovie)
-//             res.redirect("/movies/movies", {foundedMovie})
-//         })
-//         .catch((err) => next(err))
-// })
+router.post("/movies/:id/delete", (req, res, next) => {
+    const movieId = req.params.id
+    Movie.findByIdAndRemove(movieId)
+        .then(() => {
+            res.redirect("/movies")
+        })
+        .catch((err) => next(err))
+})
 
 module.exports = router;
